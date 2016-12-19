@@ -21,6 +21,26 @@ class PostsController < ApplicationController
 
   end
 
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+
+    @post.update(post_params)
+
+    redirect_to groups_path, notice: "Update Success"
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    flash[:alert] = "Post Deleted"
+    redirect_to groups_path
+  end
+
+
   private
 
   def post_params
